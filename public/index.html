@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>RCM_NLP Project</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/bbox_annotator.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">PDF Feature Extractor for RCM (Credit Suisse)</a>
+          </div>
+          <!-- Ready to have something on the right hand side of the navbar as a div-->
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+              <div id="object_types">
+                  <h3>Labels</h3>
+                  <div class="radio" ng-repeat='object in objects_to_annotate'>
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="{{object}}" checked>
+                      <!-- TODO: add the labels associated-->
+                      {{label}}
+                    </label>
+                  </div>
+              </div>
+            </ul>
+            <!-- Ready to add something on the left hand side-->
+          </div>
+          <div class="col-sm-9 col-sm-offset-3 col-md-7 col-md-offset-2 main">
+            <div id="bbox_annotator" style="display:inline-block"></div>
+            <div id="annotator_buttons_left">
+                <input class="btn btn-danger" type="submit" value="Broken" id="broken_button" data-toggle="modal" data-target="#myModal">
+                <input class="btn btn-warning" type="submit" value="Reset" id="reset_button">
+            </div>
+            <div id="annotator_buttons_right">
+                <input class="btn btn-primary" id="submit-btn" type="submit" value="Submit">
+            </div>
+            <div style="clear: both;"></div>
+            <div id="messages_box">
+                <h4 class="page-header">Message: <span id="message_line" ng-bind="message"></span></h4>
+                <textarea class="form-control" rows="5" id="output_message"></textarea>
+            </div>
+          </div>
+          <div class="col-md-3" id="right_bar">
+              <div id="info_box">
+                  <h3>Info</h3>
+                  <p><span class="boldme">Instruction:</span> {{instruction}}<p>
+                  <p><span class="boldme">Task ID:</span> {{task_id}}<p>
+                  <p><span class="boldme">Created at:</span> {{created_at}}<p>
+                  <p><span class="boldme">With Labels:</span> {{with_labels ? 'true' : 'false'}}<p>
+                  <p><span class="boldme urgent_{{urgency}}">Urgency: {{urgency}} </span><p>
+                  <p><span class="boldme">Original Image:</span> <a href="{{attachment}}">Link</a><p>
+              </div>
+              <div id="annotated_box">
+                  <h3>Annotations</h3>
+              </div>
+          </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+  
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Why is it an error?</h4>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control" rows="5" id="error_message"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit_error">Submit</button>
+            </div>
+          </div>
+  
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
